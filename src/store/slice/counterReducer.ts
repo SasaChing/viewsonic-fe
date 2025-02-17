@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RequestObj, StudentResult, CounterStateProps } from "../../type";
+import { RequestObj, StudentResult } from "../../type";
 
-// 取得 JSON 資料
+/**取得 JSON 資料 */
 export const fetchData = createAsyncThunk<RequestObj<StudentResult[]>>(
     "counter/fetchData",
     async (_, { rejectWithValue }) => {
@@ -24,12 +24,17 @@ export const fetchData = createAsyncThunk<RequestObj<StudentResult[]>>(
     }
 );
 
-// 初始狀態
+/**Counterslice 狀態格式 */
+export interface CounterStateProps {
+    countValue: StudentResult[];
+    countStatus: boolean
+}
+
 const initialState: CounterStateProps = {
     countValue: [],
     countStatus: false,
 };
-const counterReducer = createSlice({
+const counterSlice = createSlice({
     name: "counter",
     initialState,
     reducers: {
@@ -57,5 +62,5 @@ const counterReducer = createSlice({
     },
 });
 
-export const { addCount, minusCount } = counterReducer.actions;
-export default counterReducer.reducer;
+export const { addCount, minusCount } = counterSlice.actions;
+export default counterSlice.reducer;

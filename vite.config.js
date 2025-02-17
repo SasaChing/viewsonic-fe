@@ -7,7 +7,7 @@ export default defineConfig({
   // base: "/viewsonic-fe/", //github pages
   base: "./",
   server: {
-    port: 3000,
+    port: 3001,
     open: true,
   },
   build: {
