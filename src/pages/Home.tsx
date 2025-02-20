@@ -8,7 +8,7 @@ import { addCount, minusCount, fetchData } from '../store/slice/counterReducer'
 import { closeGridItem } from '../store/slice/gridReducer'
 import { setActiveTab } from '../store/slice/tabReducer'
 
-import { Tooltip, QRCode, BaseButton, BaseIconButton } from "../component";
+import { Tooltip, QRCode, BaseButton, BaseIconButton, Card } from "../component";
 
 import { CardStyleProps, StudentResult } from "../type";
 import { colorList } from "../color";
@@ -145,32 +145,6 @@ const TabButton = styled.button<CardStyleProps>`
 // #endregion
 
 // #region Card
-const CardContainer = styled.div<CardStyleProps>`
-  width: 120px;
-  border: 1px solid ${(props) => (props.$isGuest ? colorList.gray : colorList.infoLight)};
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-`;
-const CardHeader = styled.div<CardStyleProps>`
-  background-color: ${(props) => (props.$isGuest ? colorList.gray : colorList.info)};
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-`;
-const CardContent = styled.div<CardStyleProps>`
-  font-weight: bold;
-  padding: 16px 0;
-  color:${(props) => (props.$isGuest ? colorList.gray : colorList.dark)};
-`;
-const CardFooter = styled.div<CardStyleProps>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3px;
-  border-top: 1px solid ${(props) => (props.$isGuest ? colorList.gray : colorList.infoLight)};
-`;
 const Count = styled.div<CardStyleProps>`
   font-size: 18px;
   font-weight: bold;
@@ -346,24 +320,26 @@ const StudentCard: React.FC<StudentCardProps> = ({ student_id, name, count, seq 
   const dispatch = useDispatch();
 
   return (
-    <CardContainer key={student_id} $isGuest={!student_id}>
-      <CardHeader $isGuest={!student_id}>{(seq + 1).toString().padStart(2, "0")}</CardHeader>
-      <CardContent $isGuest={!student_id}>{name}</CardContent>
-      <CardFooter $isGuest={!student_id}>
-        <BaseButton
-          $backgroundColor={colorList.success}
-          $hoverBackgroundColor={colorList.successDark}
-          onClick={() => dispatch(minusCount({ student_id: student_id }))}
-          disabled={!student_id || count === 0}
-          label={"- 1"} />
-        <Count $isGuest={!student_id}>{count}</Count>
-        <BaseButton
-          $backgroundColor={colorList.error}
-          $hoverBackgroundColor={colorList.errorDark}
-          onClick={() => dispatch(addCount({ student_id: student_id }))}
-          disabled={!student_id}
-          label={"+ 1"} />
-      </CardFooter>
-    </CardContainer>
+    <Card
+      cardHeader={(seq + 1).toString().padStart(2, "0")}
+      cardContent={name}
+      cardFooter={
+        <React.Fragment>
+          <BaseButton
+            $backgroundColor={colorList.success}
+            $hoverBackgroundColor={colorList.successDark}
+            onClick={() => dispatch(minusCount({ student_id: student_id }))}
+            disabled={!student_id || count === 0}
+            label={"- 1"} />
+          <Count $isGuest={!student_id}>{count}</Count>
+          <BaseButton
+            $backgroundColor={colorList.error}
+            $hoverBackgroundColor={colorList.errorDark}
+            onClick={() => dispatch(addCount({ student_id: student_id }))}
+            disabled={!student_id}
+            label={"+ 1"} />
+        </React.Fragment>
+      }
+      disabled={!student_id} />
   );
 };
