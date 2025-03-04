@@ -4,7 +4,7 @@ import { ButtonProps } from "./Button.type";
 import { theme } from '../../style/theme';
 
 /**BaseButton 組件 */
-export const BaseButton: React.FC<ButtonProps> = ({
+export const BaseButton = React.memo(({
     label,
     $backgroundColor = theme.colors.gray,
     $hoverBackgroundColor = theme.colors.grayDark,
@@ -13,7 +13,7 @@ export const BaseButton: React.FC<ButtonProps> = ({
     tooltip,
     onClick,
     ...props
-}) => {
+}: ButtonProps) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
     const handleClick = () => {
@@ -47,10 +47,10 @@ export const BaseButton: React.FC<ButtonProps> = ({
                 : null}
         </StyledButton>
     );
-};
+})
 
 /**BaseIconButton 組件 */
-export const BaseIconButton: React.FC<ButtonProps> = ({
+export const BaseIconButton = React.memo(({
     label,
     $backgroundColor = theme.colors.transparent,
     $hoverBackgroundColor = theme.colors.transparent,
@@ -59,7 +59,7 @@ export const BaseIconButton: React.FC<ButtonProps> = ({
     tooltip,
     onClick,
     ...props
-}) => {
+}: ButtonProps) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
     const handleClick = () => {
@@ -93,4 +93,7 @@ export const BaseIconButton: React.FC<ButtonProps> = ({
                 : null}
         </StyledIconButton>
     )
-}
+})
+
+BaseButton.displayName = "BaseButton";
+BaseIconButton.displayName = "BaseIconButton";

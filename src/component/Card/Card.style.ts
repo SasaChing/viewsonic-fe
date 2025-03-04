@@ -28,3 +28,27 @@ export const CardFooter = styled.div<CardStyleProps>`
     padding: 3px;
     border-top: 1px solid ${(props) => (props.$disabled ? theme.colors.gray : theme.colors.infoLight)};
 `;
+
+export const Count = styled.div<CardStyleProps>`
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px;
+    color:${(props) => (props.$disabled ? theme.colors.gray : theme.colors.dark)};
+`;
+export const GroupCardRow = styled.div`
+    display: flex;
+    border: 1px solid ${theme.colors.gray};
+    border-radius: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    flex: 1;
+    gap: 10px;
+`;
+export const GroupLabel = styled.div`
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
+`;

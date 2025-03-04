@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { CardContainer, CardHeader, CardContent, CardFooter } from "./Card.style";
-import { CardStyleProps } from "./Card.type";
-import { theme } from '../../style/theme';
+import { CardProps } from "./Card.type";
 
-interface CardProps {
-    cardHeader?: React.ReactNode | string
-    cardContent?: React.ReactNode | string
-    cardFooter?: React.ReactNode | string
-    disabled?: boolean
-}
-
-export const Card = ({
+export const Card = React.memo(({
     cardHeader,
     cardContent,
     cardFooter,
@@ -30,4 +22,6 @@ export const Card = ({
             </CardContainer>
         </React.Fragment>
     )
-}
+})
+
+Card.displayName = "Card";

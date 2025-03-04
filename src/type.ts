@@ -11,9 +11,3 @@ export interface RequestObj<T> {
     data: T;
     message: string;
 }
-
-/**Card樣式判斷參數 */
-export interface CardStyleProps {
-    $isGuest?: boolean;
-    $active?: boolean;
-}
